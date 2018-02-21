@@ -7,12 +7,12 @@ class Node:
     def insert_node(self, n_value):
         if self.data >= n_value:
             if self.left is None:
-                self.left = node(n_value)
+                self.left = Node(n_value)
             else:
                 self.left.insert_node(n_value)
         else:
             if self.right is None:
-                self.right = node(n_value)
+                self.right = Node(n_value)
             else:
                 self.right.insert_node(n_value)
 
@@ -37,7 +37,7 @@ class Node:
             return self, parent
 
 
-t = node(4)
+t = Node(4)
 t.insert_node(3)
 t.insert_node(5)
 t.insert_node(2)
