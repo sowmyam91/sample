@@ -1,3 +1,4 @@
+import pdb
 class Node:
     def __init__(self, data):
         self.left = None
@@ -36,6 +37,17 @@ class Node:
         else:
             return self, parent
 
+    def node_exists(self, value):
+        if self.data == value:
+            return True
+        elif value < self.data:
+            if self.left is None:
+                return False
+            return self.left.node_exists(value)
+        else:
+            if self.right is None:
+                return False
+            return self.right.node_exists(value)
 
 t = Node(4)
 t.insert_node(3)
@@ -43,3 +55,6 @@ t.insert_node(5)
 t.insert_node(2)
 t.insert_node(31)
 t.print_tree()
+node =  t.node_exists(153)
+print (node)
+
