@@ -14,7 +14,8 @@ class MyType(metaclass=MyMeta):    # Python 3
 
 
 class My2Type(metaclass=MyMeta):
-    pass
+    class2 = None
+    print("Inside My2type")
 
 
 print(MyType.counter)
