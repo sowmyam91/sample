@@ -19,7 +19,7 @@ class ConverterUtils:
                         name_value = [t_data[key]['package']]
                     modifed_data = ConverterUtils.modify_name_and_value(name_value)
 
-                    t_data[kfilter_jsoney]['package'] = modifed_data
+                    t_data[key]['package'] = modifed_data
 
             tag_dict.update({tag: self.tag_list})
             self.tag_list = []
