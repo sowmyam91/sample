@@ -9,8 +9,11 @@ class MyMeta(type):
 
 
 class MyType(metaclass=MyMeta):    # Python 3
-    def __init__(self):
-        self.check = True
+    def __new__(cls):
+        print("NEWWW")
+        cls.check = True
+
+
 
 
 class My2Type(metaclass=MyMeta):
