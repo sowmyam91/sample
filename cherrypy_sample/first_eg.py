@@ -29,9 +29,9 @@ class PeopleManager:
     def people(self):
         if cherrypy.request.method == "GET":
             response = [{"name": "Sowmya", "company": "ACL"},
-                        {"name": "ABC1", "company": "Alten"},
-                        {"name": "ABC2", "company": "Calsoft"},
-                        {"name": "XYZ", "company": "Labs"},
+                        {"name": "ABC1", "company": "A11"},
+                        {"name": "ABC2", "company": "C-XYZ"},
+                        {"name": "XYZ", "company": "C LAbs"},
                         ]
         else:
             response = {"status": "Bad request"}
