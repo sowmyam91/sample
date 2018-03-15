@@ -1,17 +1,29 @@
+import sqlite3
+
+
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
 
 class SqlManager:
-    def __init__(self):
-        self.conn = None
+    def __init__(self, db_name):
+        self.conn = sqlite3.connect(db_name)
+        self.conn.row_factory = dict_factory
+        self.cursor = self.conn.cursor()
 
-    def get(self,):
-        pass
+    def get(self, query):
+        self.cursor.execute(query)
+        return self.cursor.fetchone()
 
-    def update(self,):
-        pass
+    def execute(self, query):
+        self.cursor.execute(query)
 
-    def create(self,):
-        pass
+    def get_all(self, query):
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
-    def delete(self,):
-        pass
-
+    def close(self):
+        self.conn.close()

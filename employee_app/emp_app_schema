@@ -1,0 +1,48 @@
+
+create table Company(
+	id integer primary key AUTOINCREMENT,
+	name text not null,
+	Address text not null
+	);
+
+
+create table unit(
+	id integer primary key AUTOINCREMENT,
+	name text,
+	company_id int,
+	FOREIGN KEY(company_id) REFERENCES Company(id)
+);
+
+
+ CREATE TABLE Employee(
+   id integer primary key AUTOINCREMENT,
+   first_name           TEXT    NOT NULL,
+   last_name           TEXT    NOT NULL,
+   expirience            INT     NOT NULL,
+   ADDRESS        CHAR(50),
+   SALARY         REAL,
+   designation    text NOT NULL,
+   business_unit int, 	
+    FOREIGN KEY(business_unit) REFERENCES unit(id)
+);
+
+
+insert into company ('name', 'address') values ( 'ACL', 'IBC Bangalore');
+insert into company ('name', 'address') values ('AAC', 'Dairy circle Bangalore');
+
+insert into unit ('name', 'company_id') values ('cloud', 1);
+insert into unit ('name', 'company_id') values ('retail', 1);
+insert into unit ('name', 'company_id') values ('telecom', 3);
+insert into unit ('name', 'company_id') values ('insurance', 3);
+insert into unit ('name', 'company_id') values ('retail', 3);
+insert into unit ('name', 'company_id') values ('automobiles', 3);
+
+insert into employee('first_name', 'last_name', 'expirience', 'address', 'salary', 'designation', 'business_unit')
+ values ('john', 'ad', 3, 'bangalore', 20000, 'SE', 1);
+ insert into employee('first_name', 'last_name', 'expirience', 'address', 'salary', 'designation', 'business_unit')
+ values ('johnty', 'rd', 3, 'Mumbai', 20000, 'SE', 2);
+ insert into employee('first_name', 'last_name', 'expirience', 'address', 'salary', 'designation', 'business_unit')
+ values ('sam', 'ad', 3, 'Bangalore', 20000, 'SE', 1);
+
+
+

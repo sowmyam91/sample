@@ -1,0 +1,9 @@
+<employees>
+    {% for emp in data %}
+    <employee>
+        <fname>{{ emp.first_name}} </fname>
+        <lname>{{ emp.last_name}} </lname>
+        <salary>{{ emp.SALARY}} </fname>
+        <designation>{{ emp.designation}} </designation>
+       {% endfor %}
+    </employee>

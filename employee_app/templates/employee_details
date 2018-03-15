@@ -1,0 +1,15 @@
+{
+{% for key, value in data.items() %}
+        {% if key=="first_name" %}
+            "f_name": "{{ value }}" {{-", "-}}
+        {% elif key=="last_name" %}
+            "l_name": "{{ value}}" {{-", "-}}
+        {% elif key=="expirience" %}
+            "emp_exp": "{{ value }}" {{-", "-}}
+        {% elif key=="business_unit" %}
+            "emp_bu": "{{ value }}" {{-", "-}}
+        {% else %}
+            "{{key}}":"{{value}}"  {{-", "-}}
+        {% endif %}
+{% endfor %}
+}
