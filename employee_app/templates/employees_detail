@@ -1,0 +1,5 @@
+[
+{% for data in employees %}
+    {% include "employee_details" %} {{-", "-}}
+{% endfor %}
+]

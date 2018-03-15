@@ -1,40 +1,45 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
-import urlparse
+from urlparse import parse_qs, urlparse
+
+from handler import get_employee, get_employees
+
 
 class EmployeeHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        parsed_path = urlparse.urlparse(self.path)
-        message_parts = [
-            'CLIENT VALUES1:',
-            'client_address=%s (%s)' % (self.client_address,
-                                        self.address_string()),
-            'command=%s' % self.command,
-            'path=%s' % self.path,
-            'real path=%s' % parsed_path.path,
-            'query=%s' % parsed_path.query,
-            'request_version=%s' % self.request_version,
-            '',
-            'SERVER VALUES:',
-            'server_version=%s' % self.server_version,
-            'sys_version=%s' % self.sys_version,
-            'protocol_version=%s' % self.protocol_version,
-            '',
-            'HEADERS RECEIVED:',
-        ]
-        for name, value in sorted(self.headers.items()):
-            message_parts.append('%s=%s' % (name, value.rstrip()))
-        message_parts.append('')
-        message = '\r\n'.join(message_parts)
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(message)
+        emp_id = None
+        parsed_path = urlparse(self.path)
+
+        if parsed_path.query:
+            q_p = '?'+parsed_path.query
+            try:
+                emp_id = parse_qs(parsed_path.query).get('id')[0]
+            except:
+                print "Invalid query param"
+            if emp_id:
+                if self.path == "/employee/"+q_p:
+                    response = get_employee(emp_id)
+                    self.send_response(200)
+                    self.end_headers()
+            else:
+                self.send_response(400)
+                response = {"mesage": "BAD Request"}
+        else:
+            if self.path == "/employees/":
+                response = get_employees()
+                self.send_response(200)
+                self.end_headers()
+
+        # self.send_header('Content-type', 'text/json')
+        self.wfile.write(response)
         return
 
+    def do_POST(self):
+        pass
 
 if __name__ == '__main__':
     from BaseHTTPServer import HTTPServer
 
-    server = HTTPServer(('localhost', 8080), EmployeeHandler)
+    server = HTTPServer(('localhost', 8000), EmployeeHandler)
     print 'Starting server, use <Ctrl-C> to stop'
     server.serve_forever()
