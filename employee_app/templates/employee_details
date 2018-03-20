@@ -1,15 +1,12 @@
 {
+{% set field_dict = {"first_name":"f_name", "last_name": "l_name",
+                    "expirience": "emp_exp", "business_unit": "emp_bu" } %}
 {% for key, value in data.items() %}
-        {% if key=="first_name" %}
-            "f_name": "{{ value }}" {{-", "-}}
-        {% elif key=="last_name" %}
-            "l_name": "{{ value}}" {{-", "-}}
-        {% elif key=="expirience" %}
-            "emp_exp": "{{ value }}" {{-", "-}}
-        {% elif key=="business_unit" %}
-            "emp_bu": "{{ value }}" {{-", "-}}
+        {% if key in field_dict %}
+            "{{ key }}": "{{ field_dict.get(key) }}",
         {% else %}
-            "{{key}}":"{{value}}"  {{-", "-}}
+            "{{key}}":"{{ value }}"  ,
         {% endif %}
 {% endfor %}
 }
+

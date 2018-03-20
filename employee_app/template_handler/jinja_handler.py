@@ -14,7 +14,5 @@ def render_dict(tpl_path, **context):
 
 
 def convert_response(template_path, **kwargs):
-    print kwargs
     temp_data = render_dict(template_path, **kwargs)
-    print "**",temp_data
     return ast.literal_eval(temp_data)

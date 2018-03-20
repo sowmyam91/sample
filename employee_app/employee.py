@@ -20,7 +20,7 @@ class EmployeeHandler(BaseHTTPRequestHandler):
                 if self.path == "/employee/"+q_p:
                     response = get_employee(emp_id)
                     self.send_response(200)
-                    self.end_headers()
+
             else:
                 self.send_response(400)
                 response = {"mesage": "BAD Request"}
@@ -28,13 +28,19 @@ class EmployeeHandler(BaseHTTPRequestHandler):
             if self.path == "/employees/":
                 response = get_employees()
                 self.send_response(200)
-                self.end_headers()
+        self.end_headers()
 
         # self.send_header('Content-type', 'text/json')
         self.wfile.write(response)
         return
 
     def do_POST(self):
+        pass
+
+    def do_DELETE(self,):
+        pass
+
+    def do_UPDATE(self):
         pass
 
 if __name__ == '__main__':
