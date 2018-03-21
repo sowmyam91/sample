@@ -26,4 +26,5 @@ class SqlManager:
         return self.cursor.fetchall()
 
     def close(self):
+        self.cursor.close()
         self.conn.close()

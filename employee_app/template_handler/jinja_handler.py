@@ -1,3 +1,4 @@
+import json
 import os
 import ast
 from jinja2 import Environment, FileSystemLoader
@@ -15,4 +16,5 @@ def render_dict(tpl_path, **context):
 
 def convert_response(template_path, **kwargs):
     temp_data = render_dict(template_path, **kwargs)
-    return ast.literal_eval(temp_data)
+    return json.loads(temp_data)
+

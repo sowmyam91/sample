@@ -2,11 +2,12 @@
 {% set field_dict = {"first_name":"f_name", "last_name": "l_name",
                     "expirience": "emp_exp", "business_unit": "emp_bu" } %}
 {% for key, value in data.items() %}
-        {% if key in field_dict %}
-            "{{ key }}": "{{ field_dict.get(key) }}",
+        {%- if key in field_dict -%}
+            "{{ key }}": "{{ field_dict.get(key) }}"
         {% else %}
-            "{{key}}":"{{ value }}"  ,
+            "{{key}}":"{{ value }}"
         {% endif %}
+        {%- if not loop.last -%} ,{% endif %}
 {% endfor %}
 }
 
