@@ -1,36 +1,26 @@
 from BaseHTTPServer import BaseHTTPRequestHandler
-from urlparse import parse_qs, urlparse
-
+import re
 from handler import get_employee, get_employees
 
 
 class EmployeeHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        emp_id = None
-        parsed_path = urlparse(self.path)
+        emp_grp = re.match(r'(\/employees\/(\d+)\/?$)', self.path)
+        emps_grp = re.match(r'(\/employees\/?$)', self.path)
 
-        if parsed_path.query:
-            q_p = '?'+parsed_path.query
-            try:
-                emp_id = parse_qs(parsed_path.query).get('id')[0]
-            except:
-                print "Invalid query param"
-            if emp_id:
-                if self.path == "/employee/"+q_p:
-                    response = get_employee(emp_id)
-                    self.send_response(200)
-
-            else:
-                self.send_response(400)
-                response = {"mesage": "BAD Request"}
+        if emp_grp:
+            print emp_grp
+            emp_id = emp_grp.group(2)
+            response = get_employee(emp_id)
+            self.send_response(200)
+        elif emps_grp:
+            response = get_employees()
+            self.send_response(200)
         else:
-            if self.path == "/employees/":
-                response = get_employees()
-                self.send_response(200)
+            self.send_response(400)
+            response = {"mesage": "BAD Request"}
         self.end_headers()
-
-        # self.send_header('Content-type', 'text/json')
         self.wfile.write(response)
         return
 

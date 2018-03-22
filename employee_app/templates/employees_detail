@@ -1,5 +1,6 @@
 [
 {% for data in employees %}
-    {% include "employee_details" %},
+    {% include "employee_details" %}
+    {%- if not loop.last -%} , {% endif %}
 {% endfor %}
 ]
