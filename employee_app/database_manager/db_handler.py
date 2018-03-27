@@ -18,8 +18,10 @@ class SqlManager:
         self.cursor.execute(query)
         return self.cursor.fetchone()
 
-    def execute(self, query):
-        self.cursor.execute(query)
+    def execute(self, query, *args):
+        self.cursor.execute(query, *args)
+        self.conn.commit()
+        return True
 
     def get_all(self, query):
         self.cursor.execute(query)

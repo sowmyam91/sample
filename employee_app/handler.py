@@ -5,17 +5,33 @@ from template_handler.jinja_handler import convert_response
 def get_employees():
     try:
         data = Employee().get_employees()
-        return convert_response('templates/employees_detail', employees=data)
+        return convert_response('templates/emps_xml', type='xml', employees=data)
     except Exception as e:
         print e
         return None
 
 
-def get_employee(emp_id):
+def get_employee(id):
     try:
-        data = Employee().get_employee(emp_id)
-        return convert_response('templates/employee_details', data=data)
+        data = Employee().get_employee(id)
+        return convert_response('templates/emp_xml', type='xml', data=data)
     except Exception as e:
         print e
         return None
 
+
+def delete_employees(id):
+    try:
+        return Employee().delete_employee(id)
+    except Exception as e:
+        print e
+        return False
+
+
+def add_employee(**data):
+    try:
+        # data = convert_response('templates/add_emp_json', type='json', data=data)
+        return Employee().add_employee(**data)
+    except Exception as e:
+        print e
+        return False

@@ -1,0 +1,13 @@
+{
+{% set field_dict = {"f_name" : "first_name", "l_name": "last_name",
+                    "emp_exp" : "expirience", "emp_bu": "business_unit" } %}
+{% for key, value in data.items() %}
+        {%- if key in field_dict -%}
+            "{{ field_dict.get(key) }}": "{{ value }}"
+        {% else %}
+            "{{key}}":"{{ value }}"
+        {% endif %}
+        {%- if not loop.last -%} ,{% endif %}
+{% endfor %}
+}
+

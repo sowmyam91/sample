@@ -1,0 +1,5 @@
+<employees>
+{% for data in employees %}
+    {% include "emp_xml" %}
+{% endfor %}
+</employees>

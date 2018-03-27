@@ -1,6 +1,5 @@
 import json
 import os
-import ast
 from jinja2 import Environment, FileSystemLoader
 
 
@@ -14,7 +13,10 @@ def render_dict(tpl_path, **context):
         print e
 
 
-def convert_response(template_path, **kwargs):
+def convert_response(template_path, type="json", **kwargs):
     temp_data = render_dict(template_path, **kwargs)
-    return json.loads(temp_data)
-
+    if type == "json":
+        return json.loads(temp_data)
+    elif type == "xml":
+        return temp_data
+        # return xmltodict.parse(temp_data)
