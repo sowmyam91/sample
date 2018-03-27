@@ -1,5 +1,6 @@
-<employees>
-{% for data in employees %}
-    {% include "emp_xml" %}
-{% endfor %}
-</employees>
+<?xml version="1.0" encoding="UTF-8"?>
+    <employees>
+        {%- for data in employees -%}
+            {% include "emp_xml" %}
+        {%- endfor -%}
+    </employees>

@@ -22,7 +22,11 @@ def get_employee(id):
 
 def delete_employees(id):
     try:
-        return Employee().delete_employee(id)
+        emp = Employee().get_employee(id)
+        if emp:
+            return Employee().delete_employee(id)
+        else:
+            return False
     except Exception as e:
         print e
         return False
