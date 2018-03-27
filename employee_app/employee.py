@@ -33,13 +33,14 @@ class EmployeeHandler(BaseHTTPRequestHandler):
             content_len = int(self.headers.getheader('content-length', 0))
             post_body = self.rfile.read(content_len)
             post_body = json.loads(post_body)
-            status = add_employee(**post_body)
+            status, err = add_employee(**post_body)
+            print status, err
             if status:
                 self.send_response(200)
                 response = {"status": status, "message": "Employee added successfully"}
             else:
-                self.send_response(500)
-                response = {"status": status, "message": "Failed to add Employee"}
+                self.send_response(409)
+                response = {"status": status, "message": err.message }
         return response
 
     @validate_user
