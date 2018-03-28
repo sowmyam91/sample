@@ -1,8 +1,6 @@
 {% set field_dict = {"first_name":"f_name", "last_name": "l_name",
                     "expirience": "emp_exp", "business_unit": "emp_bu" } %}
-{% if not employees %}
-    <?xml version="1.0" encoding="UTF-8"?>
-{% endif %}
+
     <employee>
         {% for key, value in data.items() %}
                 {%- if key in field_dict -%}

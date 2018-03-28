@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<{{data.method}}>
+    <response>
+          <status>
+                <code>{{ data.code }}</code>
+                <value>{{ data.status }}</value>
+                <message>{{ data.message }}</message>
+          </status>
+          <data>
+                {{ data.data}}
+          </data>
+    </response>
+</{{data.method }}>

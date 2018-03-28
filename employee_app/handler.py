@@ -35,7 +35,7 @@ def delete_employees(id):
 def add_employee(**data):
     try:
         # data = convert_response('templates/add_emp_json', type='json', data=data)
-        return Employee().add_employee(**data)
+        return Employee().add_employee(**data), None
     except Exception as e:
         print e
         return False, e

@@ -8,7 +8,7 @@ def dict_factory(cursor, row):
     return d
 
 
-class SqlManager:
+class SqlManager(object):
     def __init__(self, db_name):
         self.conn = sqlite3.connect(db_name)
         self.conn.row_factory = dict_factory
